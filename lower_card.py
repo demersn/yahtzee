@@ -2,7 +2,7 @@
 import numpy as np
 
 
-def ya_lower_find(roll):
+def ya_lower_find(roll, score):  # Find lower card possibilities from ROLL
     choice = []
     numbers = []
     for ii in range(1, 7):
@@ -15,7 +15,7 @@ def ya_lower_find(roll):
         elif np.count_nonzero(roll == ii) == 5:  # Yahtzee
             choice.append('ya')
             numbers.append(ii)
-        for jj in range(1, 7):
+        for jj in range(1, 7):  # Full House
             if ii != jj:
                 if (np.count_nonzero(roll == ii) == 3
                    and np.count_nonzero(roll == jj) == 2):
@@ -26,7 +26,7 @@ def ya_lower_find(roll):
     ss_3 = [3, 4, 5, 6]
     ls_1 = [1, 2, 3, 4, 5]
     ls_2 = [2, 3, 4, 5, 6]
-    if sum(np.in1d(ss_1, roll)) == 4:
+    if sum(np.in1d(ss_1, roll)) == 4:  # Small Straight
         choice.append('ss')
         numbers.append(1)
     if sum(np.in1d(ss_2, roll)) == 4:
@@ -35,47 +35,46 @@ def ya_lower_find(roll):
     if sum(np.in1d(ss_3, roll)) == 4:
         choice.append('ss')
         numbers.append(3)
-    if sum(np.in1d(ls_1, roll)) == 5:
+    if sum(np.in1d(ls_1, roll)) == 5:  # Large Straight
         choice.append('ls')
         numbers.append(1)
     if sum(np.in1d(ls_2, roll)) == 5:
         choice.append('ls')
         numbers.append(2)
 
-    # if 3 in roll is True and 4 in roll is True:  # Small Straight
-    #     if 1 in roll is True and 2 in roll is True:
-    #         choice.append('ss')
-    #         numbers.append(1)
-    #     elif 2 in roll is True and 5 in roll is True:
-    #         choice.append('ss')
-    #         numbers.append(2)
-    #     elif 5 in roll is True and 6 in roll is True:
-    #         choice.append('ss')
-    #         numbers.append(3)
-    # elif 2 in roll is True and 3 in roll is True and 4 in roll is True:  # Large Straight
-    #     if 1 in roll is True:
-    #         choice.append('ls')
-    #         numbers.append(1)
-    #     elif 2 in roll is True:
-    #         choice.append('ls')
-    #         numbers.append(2)
-
     return choice, numbers
 
 
+# Calculates score from previous possibilities
 def ya_lower_score(roll, choice):
     if choice == 'tok':
-        score = sum(roll)
+        pts = sum(roll)
     elif choice == 'fok':
-        score = sum(roll)
+        pts = sum(roll)
     elif choice == 'fh':
-        score = 25
+        pts = 25
     elif choice == 'ss':
-        score = 30
+        pts = 30
     elif choice == 'ls':
-        score = 40
+        pts = 40
     elif choice == 'ya':
-        score = 50
+        pts = 50
     elif choice == 'ch':
-        score = sum(roll)
-    return score
+        pts = sum(roll)
+    else:
+        pts = 0
+    return pts
+
+
+def ya_lower(roll, score):  # Returns 
+    choice = ya_lower_find(roll, score)[0]
+    pot_score_l = np.zeros(len(choice))
+    # pot_choice_l = np.zeros(len(choice))
+    if len(choice) == 0:
+        pot_score_l = [0]
+    for ii in range(len(choice)):
+        pot_score_l[ii] = ya_lower_score(roll, choice[ii])
+        # pot_choice_l[ii] = choice[ii]
+    pot_score_l = np.array(pot_score_l)
+    # pot_choice_l = np.array(pot_choice_l)
+    return pot_score_l
