@@ -1,8 +1,11 @@
 # Reroll ONE dice
 import numpy as np
+from upper_card import ya_upper
+from lower_card import ya_lower
+from lower_card import ya_lower_find
 
 
-def reroll_1(roll, score):  # Possibilities when rerolling ONE dice
+def reroll_1(roll, card):  # Possibilities when rerolling ONE dice
     up = []
     low = []
     choice = []
@@ -11,8 +14,8 @@ def reroll_1(roll, score):  # Possibilities when rerolling ONE dice
             temp_roll = np.array(roll)
             temp_roll[dice] = n
             # print(temp_roll)
-            up.append(ya_upper(temp_roll, score))
-            low.append(ya_lower(temp_roll, score))
-            choice.append(ya_lower_find(temp_roll, score)[0])
+            up.append(ya_upper(temp_roll, card))
+            low.append(ya_lower(temp_roll, card))
+            choice.append(ya_lower_find(temp_roll, card)[0])
     # low = np.array(low)
     return up, low, choice

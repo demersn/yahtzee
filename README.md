@@ -8,14 +8,14 @@ With this version, Python should be able to make a decision regading what dice(s
 
 ## To add
 ### lower_card
-+ Add CHANCE option
++ [x] Add CHANCE option
 ### yahtzee_test
 #### reroll
-+ move to it's own function
++ [x] move to it's own function
 + decide optimal reroll
 + With ONE DICE to reroll, all possibilities comme with a [1/6] probability of happening
     + Convert probability to weight to make a decision
 ### Overall
-+ Add influence of score card to reduce choices
++ [~] Add influence of score card to reduce choices
 + Write to score card
 + Reroll 2 to 5 dices
