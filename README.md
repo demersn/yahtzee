@@ -19,3 +19,5 @@ With this version, Python should be able to make a decision regading what dice(s
 + [~] Add influence of score card to reduce choices
 + Write to score card
 + Reroll 2 to 5 dices
+
+Fork?
