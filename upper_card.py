@@ -13,7 +13,7 @@ def ya_upper(roll, card):
     for ii in range(1, 7):
         pot_score_u[ii-1] = ya_upper_score(roll, ii)
     while pot_index_u == 0:
-        if card[np.argmax(pot_score_u)] == 0:
+        if card[np.argmax(pot_score_u)][1] == 0:
             # print(score[np.argmax(pot_score_u)])
             pot_index_u = np.argmax(pot_score_u)
         elif sum(pot_score_u) == 0:

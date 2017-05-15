@@ -67,7 +67,8 @@ def ya_lower_score(roll, choice):
     return pts
 
 
-def ya_lower(roll, card):  # Returns the potiential score and category
+# Returns the potiential score and category, NOT considering the card
+def ya_lower(roll, card):
     choice = np.array(ya_lower_find(roll, card)[0])
     pot_score_l = np.zeros(len(choice))
     # pot_choice_l = np.zeros(len(choice))
@@ -80,7 +81,8 @@ def ya_lower(roll, card):  # Returns the potiential score and category
     return pot_l
 
 
-def ya_lower2(roll, card):  # Returns the potiential score and category
+# Returns the potiential score and category, considering the card
+def ya_lower2(roll, card):
     choice = np.array(ya_lower_find(roll, card)[0])
     pot_score_l = np.zeros(len(choice))
     # pot_choice_l = np.zeros(len(choice))
@@ -89,8 +91,10 @@ def ya_lower2(roll, card):  # Returns the potiential score and category
     for ii in range(len(choice)):
         pot_score_l[ii] = ya_lower_score(roll, choice[ii])
     pot_score_l = np.array(pot_score_l)
-    pot_l = zip(pot_score_l, choice)  # zip here returns a list of list of list
-    print(pot_l)
+    zzip = list(zip(pot_score_l, choice))  # zip here returns a list of list of list
+    pot_lt = zzip[:]
+    pot_l = pot_lt
+#    print(pot_l)
     for jj in range(len(pot_l)):  # We remove choices if card is already full
         cat = pot_l[jj][1]
 #        print(cat)
