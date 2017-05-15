@@ -20,4 +20,4 @@ With this version, Python should be able to make a decision regading what dice(s
 + Write to score card
 + Reroll 2 to 5 dices
 
-Dice fork?
+Dice fork???
